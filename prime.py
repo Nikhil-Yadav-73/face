@@ -42,7 +42,7 @@ def is_hand_near_face(hand_landmarks):
     wrist_x = hand_landmarks.landmark[mp_hands.HandLandmark.WRIST].x
     return abs(wrist_x - 0.5) < 0.1
 
-# Main function
+
 def main():
     global last_command
     cap = cv2.VideoCapture(0)
@@ -74,7 +74,6 @@ def main():
                         if abs(hand_landmarks.landmark[mp_hands.HandLandmark.WRIST].x - 0.5) < 0.1:
                             both_hands_up = True
 
-                # Execute corresponding command based on the gesture
                 if (left_hand_up and right_hand_up) or both_hands_up:
                     print("Both hands up detected!")
                     execute_command("play/pause")
@@ -87,10 +86,8 @@ def main():
                 else:
                     print("No significant hand gesture detected.")
 
-            # Display the video frame
             cv2.imshow("Hand Gesture Control", frame)
 
-            # Exit on pressing 'q'
             if cv2.waitKey(5) & 0xFF == ord("q"):
                 break
 
